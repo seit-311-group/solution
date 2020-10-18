@@ -11,8 +11,6 @@ public class questions {
 
     private String answer;
 
-    private String schematic;
-
     private String keyword;
 
     public Integer getId() {
@@ -53,14 +51,6 @@ public class questions {
 
     public void setAnswer(String answer) {
         this.answer = answer == null ? null : answer.trim();
-    }
-
-    public String getSchematic() {
-        return schematic;
-    }
-
-    public void setSchematic(String schematic) {
-        this.schematic = schematic == null ? null : schematic.trim();
     }
 
     public String getKeyword() {

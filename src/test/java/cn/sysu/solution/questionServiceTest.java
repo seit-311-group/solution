@@ -15,6 +15,6 @@ public class questionServiceTest {
 
     @Test
     public void test1() {
-        System.out.println(questionService.importQuestions().get(0));
+        System.out.println(questionService.getQuestionsByID("1").get(0));
     }
 }

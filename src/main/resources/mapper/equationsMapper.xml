@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="cn.sysu.solution.pojo.equations" >
     <result column="id" property="id" jdbcType="INTEGER" />
     <result column="equation" property="equation" jdbcType="VARCHAR" />
-    <result column="quantityID" property="quantityid" jdbcType="VARCHAR" />
+    <result column="quantity" property="quantity" jdbcType="VARCHAR" />
     <result column="answer" property="answer" jdbcType="VARCHAR" />
     <result column="realEquation" property="realequation" jdbcType="VARCHAR" />
   </resultMap>
@@ -67,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, equation, quantityID, answer, realEquation
+    id, equation, quantity, answer, realEquation
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.sysu.solution.pojo.equationsExample" >
     select
@@ -90,9 +90,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.sysu.solution.pojo.equations" >
-    insert into equations (id, equation, quantityID, 
+    insert into equations (id, equation, quantity, 
       answer, realEquation)
-    values (#{id,jdbcType=INTEGER}, #{equation,jdbcType=VARCHAR}, #{quantityid,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{equation,jdbcType=VARCHAR}, #{quantity,jdbcType=VARCHAR}, 
       #{answer,jdbcType=VARCHAR}, #{realequation,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.sysu.solution.pojo.equations" >
@@ -104,8 +104,8 @@
       <if test="equation != null" >
         equation,
       </if>
-      <if test="quantityid != null" >
-        quantityID,
+      <if test="quantity != null" >
+        quantity,
       </if>
       <if test="answer != null" >
         answer,
@@ -121,8 +121,8 @@
       <if test="equation != null" >
         #{equation,jdbcType=VARCHAR},
       </if>
-      <if test="quantityid != null" >
-        #{quantityid,jdbcType=VARCHAR},
+      <if test="quantity != null" >
+        #{quantity,jdbcType=VARCHAR},
       </if>
       <if test="answer != null" >
         #{answer,jdbcType=VARCHAR},
@@ -147,8 +147,8 @@
       <if test="record.equation != null" >
         equation = #{record.equation,jdbcType=VARCHAR},
       </if>
-      <if test="record.quantityid != null" >
-        quantityID = #{record.quantityid,jdbcType=VARCHAR},
+      <if test="record.quantity != null" >
+        quantity = #{record.quantity,jdbcType=VARCHAR},
       </if>
       <if test="record.answer != null" >
         answer = #{record.answer,jdbcType=VARCHAR},
@@ -165,7 +165,7 @@
     update equations
     set id = #{record.id,jdbcType=INTEGER},
       equation = #{record.equation,jdbcType=VARCHAR},
-      quantityID = #{record.quantityid,jdbcType=VARCHAR},
+      quantity = #{record.quantity,jdbcType=VARCHAR},
       answer = #{record.answer,jdbcType=VARCHAR},
       realEquation = #{record.realequation,jdbcType=VARCHAR}
     <if test="_parameter != null" >

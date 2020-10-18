@@ -7,7 +7,6 @@
     <result column="analysis" property="analysis" jdbcType="VARCHAR" />
     <result column="equationID" property="equationid" jdbcType="VARCHAR" />
     <result column="answer" property="answer" jdbcType="VARCHAR" />
-    <result column="schematic" property="schematic" jdbcType="VARCHAR" />
     <result column="keyword" property="keyword" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -69,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, description, analysis, equationID, answer, schematic, keyword
+    id, description, analysis, equationID, answer, keyword
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.sysu.solution.pojo.questionsExample" >
     select
@@ -93,11 +92,11 @@
   </delete>
   <insert id="insert" parameterType="cn.sysu.solution.pojo.questions" >
     insert into questions (id, description, analysis, 
-      equationID, answer, schematic, 
-      keyword)
+      equationID, answer, keyword
+      )
     values (#{id,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{analysis,jdbcType=VARCHAR}, 
-      #{equationid,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR}, #{schematic,jdbcType=VARCHAR}, 
-      #{keyword,jdbcType=VARCHAR})
+      #{equationid,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR}, #{keyword,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="cn.sysu.solution.pojo.questions" >
     insert into questions
@@ -116,9 +115,6 @@
       </if>
       <if test="answer != null" >
         answer,
-      </if>
-      <if test="schematic != null" >
-        schematic,
       </if>
       <if test="keyword != null" >
         keyword,
@@ -139,9 +135,6 @@
       </if>
       <if test="answer != null" >
         #{answer,jdbcType=VARCHAR},
-      </if>
-      <if test="schematic != null" >
-        #{schematic,jdbcType=VARCHAR},
       </if>
       <if test="keyword != null" >
         #{keyword,jdbcType=VARCHAR},
@@ -172,9 +165,6 @@
       <if test="record.answer != null" >
         answer = #{record.answer,jdbcType=VARCHAR},
       </if>
-      <if test="record.schematic != null" >
-        schematic = #{record.schematic,jdbcType=VARCHAR},
-      </if>
       <if test="record.keyword != null" >
         keyword = #{record.keyword,jdbcType=VARCHAR},
       </if>
@@ -190,7 +180,6 @@
       analysis = #{record.analysis,jdbcType=VARCHAR},
       equationID = #{record.equationid,jdbcType=VARCHAR},
       answer = #{record.answer,jdbcType=VARCHAR},
-      schematic = #{record.schematic,jdbcType=VARCHAR},
       keyword = #{record.keyword,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />

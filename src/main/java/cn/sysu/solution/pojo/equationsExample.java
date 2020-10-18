@@ -234,73 +234,73 @@ public class equationsExample {
             return (Criteria) this;
         }
 
-        public Criteria andQuantityidIsNull() {
-            addCriterion("quantityID is null");
+        public Criteria andQuantityIsNull() {
+            addCriterion("quantity is null");
             return (Criteria) this;
         }
 
-        public Criteria andQuantityidIsNotNull() {
-            addCriterion("quantityID is not null");
+        public Criteria andQuantityIsNotNull() {
+            addCriterion("quantity is not null");
             return (Criteria) this;
         }
 
-        public Criteria andQuantityidEqualTo(String value) {
-            addCriterion("quantityID =", value, "quantityid");
+        public Criteria andQuantityEqualTo(String value) {
+            addCriterion("quantity =", value, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andQuantityidNotEqualTo(String value) {
-            addCriterion("quantityID <>", value, "quantityid");
+        public Criteria andQuantityNotEqualTo(String value) {
+            addCriterion("quantity <>", value, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andQuantityidGreaterThan(String value) {
-            addCriterion("quantityID >", value, "quantityid");
+        public Criteria andQuantityGreaterThan(String value) {
+            addCriterion("quantity >", value, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andQuantityidGreaterThanOrEqualTo(String value) {
-            addCriterion("quantityID >=", value, "quantityid");
+        public Criteria andQuantityGreaterThanOrEqualTo(String value) {
+            addCriterion("quantity >=", value, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andQuantityidLessThan(String value) {
-            addCriterion("quantityID <", value, "quantityid");
+        public Criteria andQuantityLessThan(String value) {
+            addCriterion("quantity <", value, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andQuantityidLessThanOrEqualTo(String value) {
-            addCriterion("quantityID <=", value, "quantityid");
+        public Criteria andQuantityLessThanOrEqualTo(String value) {
+            addCriterion("quantity <=", value, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andQuantityidLike(String value) {
-            addCriterion("quantityID like", value, "quantityid");
+        public Criteria andQuantityLike(String value) {
+            addCriterion("quantity like", value, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andQuantityidNotLike(String value) {
-            addCriterion("quantityID not like", value, "quantityid");
+        public Criteria andQuantityNotLike(String value) {
+            addCriterion("quantity not like", value, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andQuantityidIn(List<String> values) {
-            addCriterion("quantityID in", values, "quantityid");
+        public Criteria andQuantityIn(List<String> values) {
+            addCriterion("quantity in", values, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andQuantityidNotIn(List<String> values) {
-            addCriterion("quantityID not in", values, "quantityid");
+        public Criteria andQuantityNotIn(List<String> values) {
+            addCriterion("quantity not in", values, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andQuantityidBetween(String value1, String value2) {
-            addCriterion("quantityID between", value1, value2, "quantityid");
+        public Criteria andQuantityBetween(String value1, String value2) {
+            addCriterion("quantity between", value1, value2, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andQuantityidNotBetween(String value1, String value2) {
-            addCriterion("quantityID not between", value1, value2, "quantityid");
+        public Criteria andQuantityNotBetween(String value1, String value2) {
+            addCriterion("quantity not between", value1, value2, "quantity");
             return (Criteria) this;
         }
 

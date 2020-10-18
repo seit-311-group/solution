@@ -5,7 +5,7 @@ public class equations {
 
     private String equation;
 
-    private String quantityid;
+    private String quantity;
 
     private String answer;
 
@@ -27,12 +27,12 @@ public class equations {
         this.equation = equation == null ? null : equation.trim();
     }
 
-    public String getQuantityid() {
-        return quantityid;
+    public String getQuantity() {
+        return quantity;
     }
 
-    public void setQuantityid(String quantityid) {
-        this.quantityid = quantityid == null ? null : quantityid.trim();
+    public void setQuantity(String quantity) {
+        this.quantity = quantity == null ? null : quantity.trim();
     }
 
     public String getAnswer() {

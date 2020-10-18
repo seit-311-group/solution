@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>答题系统</title>
+</head>
+
+<style type="text/css">
+    * {
+        font-size: 18px;
+        padding: 0;
+        margin: 0;
+    }
+    .main {
+        width: 1200px;
+        height: 600px;
+
+    }
+    .question {
+        position: fixed;
+        margin-left: 15px;
+        width: 600px;
+        display:inline-block;
+        /*overflow-y: auto;*/
+    }
+    .process {
+        margin-left: 620px;
+        /*border: 1px solid black;*/
+        width: 500px;
+        margin-bottom: 30px;
+        display:inline-block;
+        /*overflow-y: auto;*/
+    }
+    .sendbtn {
+        display:block;
+        margin-left: 200px;
+        width: 100px;
+        height: 29px;
+        bottom: 5px;
+        right: 10px;
+    }
+    .text{
+        text-align:center;
+        padding:0px 0px;
+        width:100px;
+    }
+</style>
+
+<style>
+    html,body {
+        font-size: 14px;
+        font-family: "微软雅黑", Helvetica, Tahoma, Arial, sans-serif;
+        color: #000;
+        margin: 0;
+        padding: 0;
+    }
+    img {
+        border: 0;
+    }
+    input {
+        border-bottom: 1px solid #000;
+        border-top: 0px;
+        border-left: 0px;
+        border-right: 0px;
+    }
+</style>
+
+<script type="text/javascript">
+    // <![CDATA[
+    var url = window.location.href;
+    var s = url.split("/");
+    var questionid = s[s.length-1];
+    var count = 0;
+    var equationIDs = null;
+    var equationIDarr = null;
+    var quantities = null;
+
+    window.onload = function() {
+        ajax({
+            url: "http://localhost:8081/solution/getDescriptionBYId?id=" + questionid,
+            success: function (res) {
+                load(res);
+            }
+        })
+        ajax({
+            url:"http://localhost:8081/solution/getEquationIDsBYId?id=" + questionid,
+            success: function(res) {
+                equationIDs = res;
+                equationIDarr = equationIDs.split(",");
+            }
+        })
+    };
+
+    function load(res) {
+        var body = document.body;
+        var main = document.createElement('div');
+        var newbr = document.createElement('br');
+        var question = document.createElement('div');
+        var img = document.createElement('img');
+
+        main.id = 'main';
+        main.className = 'main';
+
+        question.id = 'question';
+        question.className = 'question';
+        question.innerHTML = res;
+
+        img.src = '网孔法1.jpg';
+        img.id = 'img';
+
+        question.appendChild(newbr);
+        question.appendChild(img);
+        question.appendChild(newbr);
+
+        main.appendChild(question);
+        body.appendChild(main);
+
+        button();
+    }
+    function button() {
+        var main = document.getElementById('main');
+        var process = document.createElement('div');
+        var button = document.createElement('button');
+
+        process.className = 'process';
+        process.id = 'process';
+
+        button.id = 'sendbtn';
+        button.className = 'sendbtn';
+        button.addEventListener("click",f);
+        button.innerHTML = '查看解析';
+
+        process.appendChild(button);
+        main.appendChild(process);
+    }
+    function f(){
+        ajax({url:"http://localhost:8081/solution/getAnalysisBYId?id=" + questionid,
+            success: function(res){
+                analysis(res);
+            }
+        })
+    }
+    function analysis(res){
+        var process = document.getElementById('process');
+        var newbr = document.createElement('br');
+        var button = document.getElementById('sendbtn');
+        button.parentNode.replaceChild(newbr,button);
+        process.innerHTML += res;
+
+        var newbutton = document.createElement('button');
+        newbutton.id = 'sendbtn0';
+        newbutton.className = 'sendbtn';
+        newbutton.innerHTML = '列方程组';
+        newbutton.addEventListener("click", equation);
+        process.appendChild(newbr);
+        process.appendChild(newbutton);
+
+        var img = document.getElementById('img');
+        var img1 = document.createElement('img');
+        img1.src = '网孔法2.jpg';
+        img.parentElement.replaceChild(img1, img);
+    }
+    function equation() {
+        if (count < equationIDarr.length) {
+            var equationid = equationIDarr[count];
+            ajax({
+                url: "http://localhost:8081/solution/getEquationBYId?equationid=" + equationid,
+                success: function (res) {
+                    createEquation(res);
+                }
+            });
+            ajax({
+                url: "http://localhost:8081/solution/getQuantityBYId?equationid=" + equationid,
+                success: function (res) {
+                    quantities = res;
+                    if (res.length == 0) {
+                        return;
+                    }
+                    var quantitiesArr = quantities.split(",");
+                    for (let i = 0; i < quantitiesArr.length; i++) {
+                        createQuantity(quantitiesArr[i]);
+                    }
+                }
+            });
+            if (count < equationIDarr.length){
+                newButton("下一个方程");
+            } else {
+                newButton("查看结果");
+            };
+        } else {
+            ajax({
+                url: "http://localhost:8081/solution/getAnswerBYId?id=" + questionid,
+                success: function (res) {
+                    over(res);
+                }
+            });
+        }
+    }
+    function createEquation(res){
+        var process = document.getElementById('process');
+        var newbr = document.createElement('br');
+        var button = document.getElementById('sendbtn' + count);
+        count += 1;
+        button.parentNode.replaceChild(newbr,button);
+        process.innerHTML += res;
+    }
+    function createQuantity(res){
+        var process = document.getElementById('process');
+        var div1 = document.createElement('div');
+        div1.innerHTML = res + '值为';
+        div1.className = 'title_box';
+        var input = document.createElement('input');
+        input.type = 'text';
+        input.className = 'text';
+        div1.appendChild(input);
+        process.appendChild(div1);
+    }
+    function newButton(content){
+        var process = document.getElementById('process');
+        var newbutton = document.createElement('button');
+        var newbr = document.createElement('br');
+        newbutton.id = 'sendbtn' + count;
+        newbutton.className = 'sendbtn';
+        newbutton.innerHTML = content;
+        newbutton.addEventListener("click", equation);
+        process.appendChild(newbr);
+        process.appendChild(newbutton);
+        document.scrollingElement.scrollTop = document.scrollingElement.scrollHeight;
+
+    }
+    function over(res){
+        var process = document.getElementById('process');
+        var newbr = document.createElement('br');
+        var button = document.getElementById('sendbtn' + count);
+        button.parentNode.replaceChild(newbr,button);
+        process.innerHTML += res;
+        document.scrollingElement.scrollTop = document.scrollingElement.scrollHeight;
+    }
+    function ajax(obj) {
+        var xhr = null;
+        if (window.ActiveXObject) {
+            xhr = new ActiveXObject('Microsoft.XMLHTTP')
+        } else {
+            xhr = new XMLHttpRequest();
+        }
+
+        //打开与服务器的连接
+        if (obj.method) {
+            xhr.open(obj.method, obj.url, false);
+        } else {
+            xhr.open('get', obj.url, false);
+        }
+        xhr.setRequestHeader("Content-Type",
+            "application/x-www-form-urlencoded");
+        xhr.setRequestHeader("Authorization",
+            "APPCODE 3e9dfb924f464e9593a95f9d2bbf4348")
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                //数据接收完毕
+                if (xhr.status == 200) {
+                    //console.log('请求成功',xhr.responseText)
+                    if (obj.success) {
+                        obj.success(xhr.responseText)
+                    }
+
+                } else {
+                    //console.log(xhr.status,'请求出错')
+                    if (obj.failure) {
+                        obj.failure('请求失败')
+                    }
+                }
+            }
+        }
+        if (obj.method == undefined || obj.method.toLowerCase() == 'get') {
+            xhr.send(null);
+        } else {
+            xhr.send(obj.params);
+        }
+    }
+    // ]]>
+</script>
+
+<body>
+</body>
+</html>

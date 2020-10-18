@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>答题系统</title>
+</head>
+
+<style type="text/css">
+    * {
+        font-size: 18px;
+        padding: 0;
+        margin: 0;
+    }
+
+    .main {
+        position: relative;
+        margin: 10px auto;
+        border: 1px solid black;
+        width: 600px;
+        /*overflow-y: auto;*/
+    }
+
+    .msgInput {
+        display: block;
+        width: 406px;
+        height: 90px;
+        margin: 10px auto;
+    }
+
+    .sendbtn {
+        display:block;
+        margin:0 auto;
+        width: 100px;
+        height: 29px;
+        bottom: 5px;
+        right: 10px;
+    }
+
+    .content {
+        list-style: none;
+        width: 580px;
+        height: 400px;
+        margin: 5px auto;
+        border: 1px dotted #D1D3D6;
+        /*overflow-y: scroll;*/
+    }
+
+    .msgContent {
+        width: auto;
+        max-width: 250px;
+        height: auto;
+        word-break: break-all;
+        margin: 5px;
+        padding: 3px;
+        border-radius: 5px;
+    }
+
+    .content .left {
+        float: left;
+        text-align: left;
+        background-color: lightgrey;
+    }
+
+    .content .right {
+        float: right;
+        text-align: right;
+        background-color: yellowgreen;
+    }
+    .pic {
+        text-align: center;
+    }
+</style>
+
+<style>
+    html,body {
+        font-size: 14px;
+        font-family: "微软雅黑", Helvetica, Tahoma, Arial, sans-serif;
+        color: #000;
+        margin: 0;
+        padding: 0;
+    }
+    img {
+        border: 0;
+    }
+    input {
+        border-bottom: 1px solid #000;
+        border-top: 0px;
+        border-left: 0px;
+        border-right: 0px;
+    }
+    .text{
+        text-align:center;
+        padding:0px 0px;
+        width:100px;
+    }
+
+    .cf:before,.cf:after {
+        display: table;
+        content: "";
+    }
+    .cf:after {
+        clear: both;
+    }
+    .cf {
+        *zoom: 1;
+    }
+</style>
+
+<script type="text/javascript">
+    function createEquation(){
+        var main = document.getElementById('main');
+        var newbr = document.createElement('br');
+        var button = document.getElementById('sendbtn');
+        button.parentNode.replaceChild(newbr,button);
+        main.innerHTML += '这个问题主要考查的知识点是网孔法的运用和压降的符号。\n' +
+            '        首先分析问题，可以由四个网孔使用KVL定理列出四个方程，但未知数有六个，需要再列两个节点的KCL方程。\n' +
+            '        设O、P间压降为u1，O、Q间压降为u2。';
+
+        var newbutton = document.createElement('button');
+        newbutton.id = 'sendbtn0';
+        newbutton.className = 'sendbtn';
+        newbutton.innerHTML = '列方程组';
+        newbutton.addEventListener("click",firstEquation);
+        main.appendChild(newbr);
+        main.appendChild(newbutton);
+        document.scrollingElement.scrollTop = document.scrollingElement.scrollHeight;
+    }
+    function firstEquation(){
+        var main = document.getElementById('main');
+        var newbr = document.createElement('br');
+        var button = document.getElementById('sendbtn0');
+        button.parentNode.replaceChild(newbr,button);
+        main.innerHTML += '对于网孔1，由KVL可知𝑢𝑅1+𝑢𝑂𝑃=0，由欧姆定律可知𝑢𝑅1=𝑖𝑅1𝑅1';
+
+        var div1 = document.createElement('div');
+        // var button = document.getElementById('sendbtn1');
+        // button.parentNode.replaceChild(newbr,button);
+        div1.innerHTML = '𝑢𝑂𝑃值为';
+        div1.className = 'title_box';
+        var input = document.createElement('input');
+        input.type = 'text';
+        input.className = 'text';
+        div1.appendChild(input);
+        main.appendChild(div1);
+
+        var div2 = document.createElement('div');
+        // var button = document.getElementById('sendbtn1');
+        // button.parentNode.replaceChild(newbr,button);
+        div2.innerHTML = '𝑖𝑅1值为';
+        div2.className = 'title_box';
+        var input2 = document.createElement('input');
+        input2.type = 'text';
+        input2.className = 'text';
+        div2.appendChild(input2);
+        main.appendChild(div2);
+
+        var newbutton = document.createElement('button');
+        newbutton.id = 'sendbtn1';
+        newbutton.className = 'sendbtn';
+        newbutton.innerHTML = '下一个方程';
+        newbutton.addEventListener("click",secondEquation);
+        main.appendChild(newbr);
+        main.appendChild(newbutton);
+        document.scrollingElement.scrollTop = document.scrollingElement.scrollHeight;
+    }
+    function secondEquation(){
+        var main = document.getElementById('main');
+        var newbr = document.createElement('br');
+        var button = document.getElementById('sendbtn1');
+        button.parentNode.replaceChild(newbr,button);
+        main.innerHTML += '对于网孔2，由KVL定理可知𝑢𝑃𝑂+𝑢𝑂𝑄+𝑢𝑅2=0，由欧姆定律可知𝑢𝑅2=𝑖𝑅2𝑅2';
+
+        var div1 = document.createElement('div');
+        // var button = document.getElementById('sendbtn1');
+        // button.parentNode.replaceChild(newbr,button);
+        div1.innerHTML = '𝑢𝑃𝑂值为';
+        div1.className = 'title_box';
+        var input = document.createElement('input');
+        input.type = 'text';
+        input.className = 'text';
+        div1.appendChild(input);
+        main.appendChild(div1);
+
+        var div2 = document.createElement('div');
+        // var button = document.getElementById('sendbtn1');
+        // button.parentNode.replaceChild(newbr,button);
+        div2.innerHTML = '𝑖𝑅2值为';
+        div2.className = 'title_box';
+        var input2 = document.createElement('input');
+        input2.type = 'text';
+        input2.className = 'text';
+        div2.appendChild(input2);
+        main.appendChild(div2);
+
+        var div3 = document.createElement('div');
+        // var button = document.getElementById('sendbtn1');
+        // button.parentNode.replaceChild(newbr,button);
+        div3.innerHTML = '𝑢𝑂𝑄值为';
+        div3.className = 'title_box';
+        var input3 = document.createElement('input');
+        input3.type = 'text';
+        input3.className = 'text';
+        div3.appendChild(input3);
+        main.appendChild(div3);
+
+        var newbutton = document.createElement('button');
+        newbutton.id = 'sendbtn2';
+        newbutton.className = 'sendbtn';
+        newbutton.innerHTML = '下一个方程';
+        newbutton.addEventListener("click",thirdEquation);
+        main.appendChild(newbr);
+        main.appendChild(newbutton);
+        document.scrollingElement.scrollTop = document.scrollingElement.scrollHeight;
+    }
+    function thirdEquation(){
+        var main = document.getElementById('main');
+        var newbr = document.createElement('br');
+        var button = document.getElementById('sendbtn2');
+        button.parentNode.replaceChild(newbr,button);
+        main.innerHTML += '对于网孔3，由KVL定理可知𝑢𝑅3+𝑢𝑅5+𝑢𝑄𝑂=0，由欧姆定律可知𝑢𝑅3=𝑖𝑅3𝑅3，𝑢𝑅5=𝑖𝑅5𝑅5';
+
+        var div1 = document.createElement('div');
+        // var button = document.getElementById('sendbtn1');
+        // button.parentNode.replaceChild(newbr,button);
+        div1.innerHTML = '𝑖𝑅3值为';
+        div1.className = 'title_box';
+        var input = document.createElement('input');
+        input.type = 'text';
+        input.className = 'text';
+        div1.appendChild(input);
+        main.appendChild(div1);
+
+        var div2 = document.createElement('div');
+        // var button = document.getElementById('sendbtn1');
+        // button.parentNode.replaceChild(newbr,button);
+        div2.innerHTML = '𝑖𝑅5值为';
+        div2.className = 'title_box';
+        var input2 = document.createElement('input');
+        input2.type = 'text';
+        input2.className = 'text';
+        div2.appendChild(input2);
+        main.appendChild(div2);
+
+        var div3 = document.createElement('div');
+        // var button = document.getElementById('sendbtn1');
+        // button.parentNode.replaceChild(newbr,button);
+        div3.innerHTML = '𝑢𝑄𝑂值为';
+        div3.className = 'title_box';
+        var input3 = document.createElement('input');
+        input3.type = 'text';
+        input3.className = 'text';
+        div3.appendChild(input3);
+        main.appendChild(div3);
+
+        var newbutton = document.createElement('button');
+        newbutton.id = 'sendbtn3';
+        newbutton.className = 'sendbtn';
+        newbutton.innerHTML = '下一个方程';
+        newbutton.addEventListener("click",fourthEquation);
+        main.appendChild(newbr);
+        main.appendChild(newbutton);
+        document.scrollingElement.scrollTop = document.scrollingElement.scrollHeight;
+    }
+    function fourthEquation(){
+        var main = document.getElementById('main');
+        var newbr = document.createElement('br');
+        var button = document.getElementById('sendbtn3');
+        button.parentNode.replaceChild(newbr,button);
+        main.innerHTML += '对于网孔4，由KVL定理可知𝑢𝑅4+𝑢3+𝑢𝑅5=0，由欧姆定律可知𝑢𝑅4=𝑖𝑅4𝑅4，𝑢𝑅5=𝑖𝑅5𝑅5';
+
+        var div1 = document.createElement('div');
+        // var button = document.getElementById('sendbtn1');
+        // button.parentNode.replaceChild(newbr,button);
+        div1.innerHTML = '𝑖𝑅4值为';
+        div1.className = 'title_box';
+        var input = document.createElement('input');
+        input.type = 'text';
+        input.className = 'text';
+        div1.appendChild(input);
+        main.appendChild(div1);
+
+        var div2 = document.createElement('div');
+        // var button = document.getElementById('sendbtn1');
+        // button.parentNode.replaceChild(newbr,button);
+        div2.innerHTML = '𝑖𝑅5值为';
+        div2.className = 'title_box';
+        var input2 = document.createElement('input');
+        input2.type = 'text';
+        input2.className = 'text';
+        div2.appendChild(input2);
+        main.appendChild(div2);
+
+        var newbutton = document.createElement('button');
+        newbutton.id = 'sendbtn4';
+        newbutton.className = 'sendbtn';
+        newbutton.innerHTML = '下一个方程';
+        newbutton.addEventListener("click",fifthEquation);
+        main.appendChild(newbr);
+        main.appendChild(newbutton);
+        document.scrollingElement.scrollTop = document.scrollingElement.scrollHeight;
+    }
+    function fifthEquation(){
+        var main = document.getElementById('main');
+        var newbr = document.createElement('br');
+        var button = document.getElementById('sendbtn4');
+        button.parentNode.replaceChild(newbr,button);
+        main.innerHTML += '对于P点，由KCL定理可知𝑖2=𝑖1+𝑖5';
+
+        var newbutton = document.createElement('button');
+        newbutton.id = 'sendbtn5';
+        newbutton.className = 'sendbtn';
+        newbutton.innerHTML = '下一个方程';
+        newbutton.addEventListener("click",sixthEquation);
+        main.appendChild(newbr);
+        main.appendChild(newbutton);
+        document.scrollingElement.scrollTop = document.scrollingElement.scrollHeight;
+    }
+    function sixthEquation(){
+        var main = document.getElementById('main');
+        var newbr = document.createElement('br');
+        var button = document.getElementById('sendbtn5');
+        button.parentNode.replaceChild(newbr,button);
+        main.innerHTML += '对于Q点，由KCL定理可知𝑖2=𝑖3+𝑖6';
+
+        var newbutton = document.createElement('button');
+        newbutton.id = 'sendbtn6';
+        newbutton.className = 'sendbtn';
+        newbutton.innerHTML = '结果';
+        newbutton.addEventListener("click",over);
+        main.appendChild(newbr);
+        main.appendChild(newbutton);
+        document.scrollingElement.scrollTop = document.scrollingElement.scrollHeight;
+    }
+    function over(){
+        var main = document.getElementById('main');
+        var newbr = document.createElement('br');
+        var button = document.getElementById('sendbtn6');
+        button.parentNode.replaceChild(newbr,button);
+        main.innerHTML += '联立各式，可得i1=-7.5A，i2=-2.5A，i3=3.93A，i4=2.413A';
+        document.scrollingElement.scrollTop = document.scrollingElement.scrollHeight;
+    }
+</script>
+
+<body>
+<div id="main" class="main">
+    利用网孔法求解i1，i2，i3，i4。
+    <br>
+    <br>
+    <div id="pic" class="pic">
+        <img src="../static/网孔法例题.jpg"/>
+    </div>
+    <br>
+    <hr align=center width=600 color=black size=1>
+<!--    <div id="analysis" class="analysis">-->
+<!--        这个问题主要考查的知识点是网孔法的运用和压降的符号。-->
+<!--        首先分析问题，可以由四个网孔使用KVL定理列出四个方程，但未知数有六个，需要再列两个节点的KCL方程。-->
+<!--        设O、P间压降为u1，O、Q间压降为u2。-->
+<!--    </div>-->
+    <button id="sendbtn" class="sendbtn" onclick="createEquation()">查看解析</button>
+</div>
+</body>
+</html>

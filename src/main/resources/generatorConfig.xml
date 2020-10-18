@@ -57,7 +57,7 @@
 
         <table tableName="questions" domainObjectName="questions"></table>
 
-        <table tableName="quantities" domainObjectName="quantities"></table>
+<!--        <table tableName="quantities" domainObjectName="quantities"></table>-->
 
         <table tableName="equations" domainObjectName="equations"></table>
 
