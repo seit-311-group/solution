@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.sysu.solution.mapper.questionsMapper" >
-  <resultMap id="BaseResultMap" type="cn.sysu.solution.pojo.questions" >
+<mapper namespace="cn.sysu.solution.mapper.pointMapper" >
+  <resultMap id="BaseResultMap" type="cn.sysu.solution.pojo.point" >
     <result column="id" property="id" jdbcType="INTEGER" />
-    <result column="description" property="description" jdbcType="VARCHAR" />
-    <result column="analysis" property="analysis" jdbcType="VARCHAR" />
-    <result column="equationID" property="equationid" jdbcType="VARCHAR" />
-    <result column="answer" property="answer" jdbcType="VARCHAR" />
-    <result column="keyword" property="keyword" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,15 +64,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, description, analysis, equationID, answer, keyword
+    id, content
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.sysu.solution.pojo.questionsExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.sysu.solution.pojo.pointExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from questions
+    from point
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -84,89 +80,49 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="cn.sysu.solution.pojo.questionsExample" >
-    delete from questions
+  <delete id="deleteByExample" parameterType="cn.sysu.solution.pojo.pointExample" >
+    delete from point
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.sysu.solution.pojo.questions" >
-    insert into questions (id, description, analysis, 
-      equationID, answer, keyword
-      )
-    values (#{id,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{analysis,jdbcType=VARCHAR}, 
-      #{equationid,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR}, #{keyword,jdbcType=VARCHAR}
-      )
+  <insert id="insert" parameterType="cn.sysu.solution.pojo.point" >
+    insert into point (id, content)
+    values (#{id,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="cn.sysu.solution.pojo.questions" >
-    insert into questions
+  <insert id="insertSelective" parameterType="cn.sysu.solution.pojo.point" >
+    insert into point
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="description != null" >
-        description,
-      </if>
-      <if test="analysis != null" >
-        analysis,
-      </if>
-      <if test="equationid != null" >
-        equationID,
-      </if>
-      <if test="answer != null" >
-        answer,
-      </if>
-      <if test="keyword != null" >
-        keyword,
+      <if test="content != null" >
+        content,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="description != null" >
-        #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="analysis != null" >
-        #{analysis,jdbcType=VARCHAR},
-      </if>
-      <if test="equationid != null" >
-        #{equationid,jdbcType=VARCHAR},
-      </if>
-      <if test="answer != null" >
-        #{answer,jdbcType=VARCHAR},
-      </if>
-      <if test="keyword != null" >
-        #{keyword,jdbcType=VARCHAR},
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.sysu.solution.pojo.questionsExample" resultType="java.lang.Integer" >
-    select count(*) from questions
+  <select id="countByExample" parameterType="cn.sysu.solution.pojo.pointExample" resultType="java.lang.Integer" >
+    select count(*) from point
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update questions
+    update point
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.description != null" >
-        description = #{record.description,jdbcType=VARCHAR},
-      </if>
-      <if test="record.analysis != null" >
-        analysis = #{record.analysis,jdbcType=VARCHAR},
-      </if>
-      <if test="record.equationid != null" >
-        equationID = #{record.equationid,jdbcType=VARCHAR},
-      </if>
-      <if test="record.answer != null" >
-        answer = #{record.answer,jdbcType=VARCHAR},
-      </if>
-      <if test="record.keyword != null" >
-        keyword = #{record.keyword,jdbcType=VARCHAR},
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -174,13 +130,9 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update questions
+    update point
     set id = #{record.id,jdbcType=INTEGER},
-      description = #{record.description,jdbcType=VARCHAR},
-      analysis = #{record.analysis,jdbcType=VARCHAR},
-      equationID = #{record.equationid,jdbcType=VARCHAR},
-      answer = #{record.answer,jdbcType=VARCHAR},
-      keyword = #{record.keyword,jdbcType=VARCHAR}
+      content = #{record.content,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>

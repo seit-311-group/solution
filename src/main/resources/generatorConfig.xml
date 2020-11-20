@@ -18,7 +18,7 @@
         <!-- JDBC连接 其中connectionURL后面的newtest改为你创建的数据库，紧跟在后面是数据库连接的账户和密码-->
         <jdbcConnection
                 driverClass="com.mysql.jdbc.Driver"
-                connectionURL="jdbc:mysql://localhost:3306/solution"
+                connectionURL="jdbc:mysql://localhost:3306/solution2"
                 userId="root"
                 password="123456">
         </jdbcConnection>
@@ -55,11 +55,15 @@
         <!-- schema即为数据库名 tableName为对应的数据库表 domainObjectName是要生成的实体类 enable*ByExample
             是否生成 example类 -->
 
-        <table tableName="questions" domainObjectName="questions"></table>
+        <table tableName="question" domainObjectName="question"></table>
 
 <!--        <table tableName="quantities" domainObjectName="quantities"></table>-->
 
-        <table tableName="equations" domainObjectName="equations"></table>
+        <table tableName="point" domainObjectName="point"></table>
+
+        <table tableName="subquestion" domainObjectName="subquestion"></table>
+
+        <table tableName="option_t" domainObjectName="option_t"></table>
 
 
     </context>

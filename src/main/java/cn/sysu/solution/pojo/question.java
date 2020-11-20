@@ -1,17 +1,17 @@
 package cn.sysu.solution.pojo;
 
-public class questions {
+public class question {
     private Integer id;
 
     private String description;
 
-    private String analysis;
+    private String pointid;
 
-    private String equationid;
+    private String subquesid;
 
     private String answer;
 
-    private String keyword;
+    private String analysis;
 
     public Integer getId() {
         return id;
@@ -29,20 +29,20 @@ public class questions {
         this.description = description == null ? null : description.trim();
     }
 
-    public String getAnalysis() {
-        return analysis;
+    public String getPointid() {
+        return pointid;
     }
 
-    public void setAnalysis(String analysis) {
-        this.analysis = analysis == null ? null : analysis.trim();
+    public void setPointid(String pointid) {
+        this.pointid = pointid == null ? null : pointid.trim();
     }
 
-    public String getEquationid() {
-        return equationid;
+    public String getSubquesid() {
+        return subquesid;
     }
 
-    public void setEquationid(String equationid) {
-        this.equationid = equationid == null ? null : equationid.trim();
+    public void setSubquesid(String subquesid) {
+        this.subquesid = subquesid == null ? null : subquesid.trim();
     }
 
     public String getAnswer() {
@@ -53,11 +53,11 @@ public class questions {
         this.answer = answer == null ? null : answer.trim();
     }
 
-    public String getKeyword() {
-        return keyword;
+    public String getAnalysis() {
+        return analysis;
     }
 
-    public void setKeyword(String keyword) {
-        this.keyword = keyword == null ? null : keyword.trim();
+    public void setAnalysis(String analysis) {
+        this.analysis = analysis == null ? null : analysis.trim();
     }
 }

@@ -1,8 +1,9 @@
 package cn.sysu.solution.controller;
 
-import cn.sysu.solution.pojo.equations;
-import cn.sysu.solution.pojo.questions;
-import cn.sysu.solution.sevice.CoreService;
+import cn.sysu.solution.pojo.option_t;
+import cn.sysu.solution.pojo.point;
+import cn.sysu.solution.pojo.question;
+import cn.sysu.solution.pojo.subquestion;
 import cn.sysu.solution.sevice.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,15 +15,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/solution")
 public class QueryController {
-    @Autowired
-    private CoreService coreService;
+
     @Autowired
     private QuestionService questionService;
 
     @RequestMapping("/getDescriptionBYId")
     public String getDescriptionBYId(@RequestParam(value = "id") String id) throws Exception {
-        List<questions> questions = questionService.getQuestionsByID(id);
-        questions question = null;
+        List<question> questions = questionService.getQuestionsByID(id);
+        question question = null;
         if (questions.size() == 1) {
             question = questions.get(0);
         }
@@ -30,57 +30,96 @@ public class QueryController {
     }
     @RequestMapping("/getAnalysisBYId")
     public String getAnalysisBYId(@RequestParam(value = "id") String id) throws Exception {
-        List<questions> questions = questionService.getQuestionsByID(id);
-        questions question = null;
+        List<question> questions = questionService.getQuestionsByID(id);
+        question question = null;
         if (questions.size() == 1) {
             question = questions.get(0);
         }
         return question.getAnalysis();
     }
-
-    @RequestMapping("/getEquationIDsBYId")
-    public String getEquationIDsBYId(@RequestParam(value = "id") String id) throws Exception {
-        List<questions> questions = questionService.getQuestionsByID(id);
-        questions question = null;
+    @RequestMapping("/getSubquesIDsBYId")
+    public String getSubquesIDsBYId(@RequestParam(value = "id") String id) throws Exception {
+        List<question> questions = questionService.getQuestionsByID(id);
+        question question = null;
         if (questions.size() == 1) {
             question = questions.get(0);
         }
-        return question.getEquationid();
+        return question.getSubquesid();
     }
-
-    @RequestMapping("/getEquationBYId")
-    public String getEquationBYId(@RequestParam(value = "equationid") String equationid) throws Exception {
-        List<equations> equations = questionService.getEquationsByID(equationid);
-        equations equation = null;
-        if (equations.size() == 1) {
-            equation = equations.get(0);
+    @RequestMapping("/getPointIDsBYId")
+    public String getPointIDsBYId(@RequestParam(value = "id") String id) throws Exception {
+        List<question> questions = questionService.getQuestionsByID(id);
+        question question = null;
+        if (questions.size() == 1) {
+            question = questions.get(0);
         }
-        return equation.getEquation();
+        return question.getPointid();
     }
-
-    @RequestMapping("/getQuantityBYId")
-    public String getQuantityBYId(@RequestParam(value = "equationid") String equationid) throws Exception {
-        List<equations> equations = questionService.getEquationsByID(equationid);
-        equations equation = null;
-        if (equations.size() == 1) {
-            equation = equations.get(0);
-        }
-        return equation.getQuantity();
-    }
-
-    @RequestMapping("/getAnswerBYId")
-    public String getAnswerBYId(@RequestParam(value = "id") String id) throws Exception {
-        List<questions> questions = questionService.getQuestionsByID(id);
-        questions question = null;
+    @RequestMapping("/getAnswerByID")
+    public String getAnswerByID(@RequestParam(value = "id") String id) throws Exception {
+        List<question> questions = questionService.getQuestionsByID(id);
+        question question = null;
         if (questions.size() == 1) {
             question = questions.get(0);
         }
         return question.getAnswer();
     }
 
-    @RequestMapping("/judge")
-    public String judge(@RequestParam(value = "questionID") String ID, @RequestParam(value = "equationID") String equationID, @RequestParam(value = "answer") String answer) throws Exception {
-        return "";
+    @RequestMapping("/getContentBYSubquesId")
+    public String getContentBYSubquesId(@RequestParam(value = "id") String id) throws Exception {
+        List<subquestion> subquestions = questionService.getSubquestionsByID(id);
+        subquestion subquestion = null;
+        if (subquestions.size() == 1) {
+            subquestion = subquestions.get(0);
+        }
+        return subquestion.getContent();
+    }
+    @RequestMapping("/getAnswerBYSubquesId")
+    public int getAnswerBYSubquesId(@RequestParam(value = "id") String id) throws Exception {
+        List<subquestion> subquestions = questionService.getSubquestionsByID(id);
+        subquestion subquestion = null;
+        if (subquestions.size() == 1) {
+            subquestion = subquestions.get(0);
+        }
+        return subquestion.getAnswer();
+    }
+    @RequestMapping("/getOptionIDBYSubquesId")
+    public String getOptionIDBYSubquesId(@RequestParam(value = "id") String id) throws Exception {
+        List<subquestion> subquestions = questionService.getSubquestionsByID(id);
+        subquestion subquestion = null;
+        if (subquestions.size() == 1) {
+            subquestion = subquestions.get(0);
+        }
+        return subquestion.getOptionid();
+    }
+
+    @RequestMapping("/getContentBYOptionId")
+    public String getContentBYOptionId(@RequestParam(value = "id") String id) throws Exception {
+        List<option_t> option_ts = questionService.getOptionsByID(id);
+        option_t option_t = null;
+        if (option_ts.size() == 1) {
+            option_t = option_ts.get(0);
+        }
+        return option_t.getContent();
+    }
+    @RequestMapping("/getPointIDBYOptionID")
+    public String getPointIDBYOptionID(@RequestParam(value = "id") String id) throws Exception {
+        List<option_t> option_ts = questionService.getOptionsByID(id);
+        option_t option_t = null;
+        if (option_ts.size() == 1) {
+            option_t = option_ts.get(0);
+        }
+        return option_t.getPointid();
+    }
+
+    @RequestMapping("/getContentBYPointId")
+    public String getContentBYPointId(@RequestParam(value = "id") String id) throws Exception {
+        List<point> points = questionService.getPointsByID(id);
+        point point = null;
+        if (points.size() == 1) {
+            point = points.get(0);
+        }
+        return point.getContent();
     }
 
 }
