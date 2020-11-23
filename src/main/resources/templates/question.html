@@ -342,13 +342,16 @@
         });
         newdiv.appendChild(newbr);
         newdiv.appendChild(newbr);
-        let div = document.createElement("div");
+        let conclusion = document.createElement("div");
         let text = "你对以下知识点的掌握还不够："+"\n";
+        conclusion.innerHTML += text;
+        conclusion.appendChild(newbr);
         for (let i of errorOption){
-            text += map.get(i) + "\n";
+            let point = document.createElement("div");
+            point.innerHTML += map.get(i);
+            conclusion.appendChild(point);
         }
-        div.innerHTML += text;
-        newdiv.appendChild(div);
+        newdiv.appendChild(conclusion);
         process.appendChild(newdiv);
         document.scrollingElement.scrollTop = document.scrollingElement.scrollHeight;
     }
