@@ -13,4 +13,6 @@ public class PageIndexController {
     public String question2() {return "question";}
     @RequestMapping("/3")
     public String question3() {return "question";}
+    @RequestMapping("/4")
+    public String question4() {return "questionTemp";}
 }

@@ -71,7 +71,6 @@
     let s = url.split("/");
     let questionid = s[s.length-1];
     let count = 0;
-
     let urlMap = new Map();
     urlMap.set("1","网孔法");
     urlMap.set("2","节点法");
@@ -234,6 +233,8 @@
                                     url: "http://localhost:8081/solution/getContentBYPointId?id=" + pointID,
                                     success: function (res) {
                                         map.set(map1.get(optionID), res);
+                                        console.log("map1:"+map1.size);
+                                        console.log("map:"+map.size);
                                     }
                                 });
                             }
@@ -273,7 +274,7 @@
         let div = document.createElement('div');
         let input = document.createElement('input');
         input.type = 'radio';
-        input.name = 'option' + count; //选项名，每个小问题的几个选项的选项名相同，方便批改
+        input.name = 'option' + count;
         input.value = content;
 
         div.appendChild(input);
@@ -328,7 +329,6 @@
 
     }
     function over(){
-        highLight();
         let process = document.getElementById('process');
         let newbr = document.createElement('br')
         let newdiv = document.createElement('div' + (count+1));
@@ -348,26 +348,12 @@
         conclusion.appendChild(newbr);
         for (let i of errorOption){
             let point = document.createElement("div");
-            if (map.has(i)) {
-                point.innerHTML += map.get(i);
-            } else {
-                continue;
-            }
+            point.innerHTML += map.get(i);
             conclusion.appendChild(point);
         }
         newdiv.appendChild(conclusion);
         process.appendChild(newdiv);
         document.scrollingElement.scrollTop = document.scrollingElement.scrollHeight;
-    }
-    function highLight(){
-        let options = document.getElementsByTagName('input');
-        console.log(options.length);
-        for(let i = 0; i < options.length; i++){
-            if(errorOption.has(options[i].value)) {
-                console.log(options[i].value);
-                options[i].parentElement.style.color = "red";
-            }
-        }
     }
     function ajax(obj) {
         let xhr = null;
