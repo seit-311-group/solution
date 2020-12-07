@@ -19,14 +19,15 @@
     .question {
         position: fixed;
         margin-left: 15px;
-        width: 600px;
+        width: 580px;
         display:inline-block;
-        /*overflow-y: auto;*/
+        /*overflow-y: scroll;*/
+        /*overflow-x: hidden;*/
     }
     .process {
         margin-left: 620px;
         /*border: 1px solid black;*/
-        width: 500px;
+        width: 640px;
         margin-bottom: 30px;
         display:inline-block;
         /*overflow-y: auto;*/
@@ -71,10 +72,11 @@
     let s = url.split("/");
     let questionid = s[s.length-1];
     let count = 0;
+
     let urlMap = new Map();
-    urlMap.set("1","网孔法");
-    urlMap.set("2","节点法");
-    urlMap.set("3","叠加原理");
+    // urlMap.set("1","网孔法");
+    // urlMap.set("2","节点法");
+    // urlMap.set("3","叠加原理");
     urlMap.set("4","戴维南");
 
     let questionName = urlMap.get(questionid);
@@ -114,8 +116,9 @@
         let main = document.createElement('div');
         let newbr = document.createElement('br');
         let question = document.createElement('div');
+        let div = document.createElement('div');
         let img = document.createElement('img');
-
+        div.style.textAlign = 'center';
         main.id = 'main';
         main.className = 'main';
 
@@ -127,8 +130,8 @@
         img.id = 'img';
 
         question.appendChild(newbr);
-        question.appendChild(img);
-        question.appendChild(newbr);
+        div.appendChild(img);
+        question.appendChild(div);
 
         main.appendChild(question);
         body.appendChild(main);
@@ -178,85 +181,94 @@
         img1.src = questionName + '/picture2.png';
         img.parentElement.replaceChild(img1, img);
     }
-    function remind() {
-        alert("请重选！");
-    }
     function equation() {
         if((count > 0) && !check()){
-            remind();
-        }
-        else{if (count < subquesIDarr.length) {
-            let subquesid = subquesIDarr[count];
-            ajax({
-                url: "http://localhost:8081/solution/getContentBYSubquesId?id=" + subquesid,
-                success: function (res) {
-                    createSubquestion(res);
-                }
-            });
-            ajax({
-                url: "http://localhost:8081/solution/getAnswerBYSubquesId?id=" + subquesid,
-                success: function (res) {
-                    answerID = res;
-                }
-            });
-            ajax({
-                url: "http://localhost:8081/solution/getOptionIDBYSubquesId?id=" + subquesid,
-                success: function (res) {
-                    let options = res;
-                    if (res.length == 0) {
-                        return;
+            alert("选择错误，请重新选择！");
+        } else{
+            if (count == 1) {
+                addPicture('part1.png');
+            }
+            if (count == 6) {
+                addPicture('part2.png');
+            }
+            if (count < subquesIDarr.length) {
+                let subquesid = subquesIDarr[count];
+                ajax({
+                    url: "http://localhost:8081/solution/getContentBYSubquesId?id=" + subquesid,
+                    success: function (res) {
+                        createSubquestion(res);
                     }
-                    let optionsArr = options.split(",");
+                });
+                ajax({
+                    url: "http://localhost:8081/solution/getAnswerBYSubquesId?id=" + subquesid,
+                    success: function (res) {
+                        answerID = res;
+                    }
+                });
+                ajax({
+                    url: "http://localhost:8081/solution/getOptionIDBYSubquesId?id=" + subquesid,
+                    success: function (res) {
+                        let options = res;
+                        if (res.length == 0) {
+                            return;
+                        }
+                        let optionsArr = options.split(",");
 
-                    for (let i = 0; i < optionsArr.length; i++) {
-                        let content = null;
-                        let optionID = optionsArr[i];
-                        let map1 = new Map();//选项ID和内容的kv对
-                        ajax({
-                            url: "http://localhost:8081/solution/getContentBYOptionId?id=" + optionID,
-                            success: function (res) {
-                                content = res;
-                                map1.set(optionID, content);
-                                if (optionID == answerID.toString()) {
-                                    answer = res;
-                                }
-                            }
-                        });
-                        ajax({
-                            url:"http://localhost:8081/solution/getPointIDBYOptionID?id=" + optionID,
-                            success: function(res) {
-                                if(res == "") {
-                                    return;
-                                }
-                                let pointID = res;
-                                ajax({
-                                    url: "http://localhost:8081/solution/getContentBYPointId?id=" + pointID,
-                                    success: function (res) {
-                                        map.set(map1.get(optionID), res);
-                                        console.log("map1:"+map1.size);
-                                        console.log("map:"+map.size);
+                        for (let i = 0; i < optionsArr.length; i++) {
+                            let content = null;
+                            let optionID = optionsArr[i];
+                            let map1 = new Map();//选项ID和内容的kv对
+                            ajax({
+                                url: "http://localhost:8081/solution/getContentBYOptionId?id=" + optionID,
+                                success: function (res) {
+                                    content = res;
+                                    map1.set(optionID, content);
+                                    if (optionID == answerID.toString()) {
+                                        answer = res;
                                     }
-                                });
+                                }
+                            });
+                            ajax({
+                                url:"http://localhost:8081/solution/getPointIDBYOptionID?id=" + optionID,
+                                success: function(res) {
+                                    if(res == "") {
+                                        return;
+                                    }
+                                    let pointID = res;
+                                    ajax({
+                                        url: "http://localhost:8081/solution/getContentBYPointId?id=" + pointID,
+                                        success: function (res) {
+                                            map.set(map1.get(optionID), res);
+                                        }
+                                    });
+                                }
+                            })
+                            if ((content.substr(content.length-4, 4) == ".png") || (content.substr(content.length-4, 4) == ".jpg")) {
+                                createPicOption(content, 65 + i);
                             }
-                        })
-                        if ((content.substr(content.length-4, 4) == ".png") || (content.substr(content.length-4, 4) == ".jpg")) {
-                            createPicOption(content, 65 + i);
-                        }
-                        else {
-                            createOption(content, 65 + i);//65是A对应的ASCII码
+                            else {
+                                createOption(content, 65 + i);//65是A对应的ASCII码
+                            }
                         }
                     }
-                }
-            });
-            if (count < subquesIDarr.length){
+                });
                 newButton("提交");
             } else {
-                newButton("提交");
+                over();
+            }
+        };
+    }
+    function addPicture(pic) {
+        let question = document.getElementById('question');
+        let img = document.createElement('img');
+        let div = document.createElement('div');
+        div.style.textAlign = 'center';
+        img.src = questionName + '/' + pic;
+        img.id = 'img';
+        div.appendChild(img);
 
-            };
-        }else {
-            over();
-        }};
+        question.appendChild(div);
+
     }
     function createSubquestion(res){
         let process = document.getElementById('process');
@@ -274,7 +286,7 @@
         let div = document.createElement('div');
         let input = document.createElement('input');
         input.type = 'radio';
-        input.name = 'option' + count;
+        input.name = 'option' + count; //选项名，每个小问题的几个选项的选项名相同，方便批改
         input.value = content;
 
         div.appendChild(input);
@@ -286,6 +298,7 @@
         let div = document.createElement('div');
         let input = document.createElement('input');
         let newbr = document.createElement('br');
+
         input.type = 'radio';
         input.name = 'option' + count;
         input.value = content;
@@ -329,6 +342,7 @@
 
     }
     function over(){
+        highLight();
         let process = document.getElementById('process');
         let newbr = document.createElement('br')
         let newdiv = document.createElement('div' + (count+1));
@@ -348,12 +362,24 @@
         conclusion.appendChild(newbr);
         for (let i of errorOption){
             let point = document.createElement("div");
-            point.innerHTML += map.get(i);
+            if (map.has(i)) {
+                point.innerHTML += map.get(i);
+            } else {
+                continue;
+            }
             conclusion.appendChild(point);
         }
         newdiv.appendChild(conclusion);
         process.appendChild(newdiv);
         document.scrollingElement.scrollTop = document.scrollingElement.scrollHeight;
+    }
+    function highLight(){
+        let options = document.getElementsByTagName('input');
+        for(let i = 0; i < options.length; i++){
+            if(errorOption.has(options[i].value)) {
+                options[i].parentElement.style.color = "red";
+            }
+        }
     }
     function ajax(obj) {
         let xhr = null;

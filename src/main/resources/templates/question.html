@@ -76,7 +76,7 @@
     urlMap.set("1","网孔法");
     urlMap.set("2","节点法");
     urlMap.set("3","叠加原理");
-    urlMap.set("4","戴维南");
+    // urlMap.set("4","戴维南");
 
     let questionName = urlMap.get(questionid);
     let subquesIDarr = null;
@@ -179,14 +179,12 @@
         img1.src = questionName + '/picture2.png';
         img.parentElement.replaceChild(img1, img);
     }
-    function remind() {
-        alert("请重选！");
-    }
     function equation() {
         if((count > 0) && !check()){
-            remind();
+            alert("选择错误，请重新选择！");
         }
-        else{if (count < subquesIDarr.length) {
+        else{
+            if (count < subquesIDarr.length) {
             let subquesid = subquesIDarr[count];
             ajax({
                 url: "http://localhost:8081/solution/getContentBYSubquesId?id=" + subquesid,
@@ -247,15 +245,11 @@
                     }
                 }
             });
-            if (count < subquesIDarr.length){
-                newButton("提交");
+            newButton("提交");
             } else {
-                newButton("提交");
-
-            };
-        }else {
             over();
-        }};
+            }
+        };
     }
     function createSubquestion(res){
         let process = document.getElementById('process');
@@ -361,10 +355,8 @@
     }
     function highLight(){
         let options = document.getElementsByTagName('input');
-        console.log(options.length);
         for(let i = 0; i < options.length; i++){
             if(errorOption.has(options[i].value)) {
-                console.log(options[i].value);
                 options[i].parentElement.style.color = "red";
             }
         }
