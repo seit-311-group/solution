@@ -64,6 +64,25 @@ public class QueryController {
         }
         return question.getAnswer();
     }
+    @RequestMapping("/getAddPictureByID")
+    public String getAddPictureByID(@RequestParam(value = "id") String id) throws Exception {
+        List<question> questions = questionService.getQuestionsByID(id);
+        question question = null;
+        if (questions.size() == 1) {
+            question = questions.get(0);
+        }
+        return question.getAddpicture();
+    }
+    @RequestMapping("/getChangePictureByID")
+    public String getChangePictureByID(@RequestParam(value = "id") String id) throws Exception {
+        List<question> questions = questionService.getQuestionsByID(id);
+        question question = null;
+        if (questions.size() == 1) {
+            question = questions.get(0);
+        }
+        return question.getChangepicture();
+    }
+
 
     @RequestMapping("/getContentBYSubquesId")
     public String getContentBYSubquesId(@RequestParam(value = "id") String id) throws Exception {
@@ -93,6 +112,7 @@ public class QueryController {
         return subquestion.getOptionid();
     }
 
+
     @RequestMapping("/getContentBYOptionId")
     public String getContentBYOptionId(@RequestParam(value = "id") String id) throws Exception {
         List<option_t> option_ts = questionService.getOptionsByID(id);
@@ -111,6 +131,7 @@ public class QueryController {
         }
         return option_t.getPointid();
     }
+
 
     @RequestMapping("/getContentBYPointId")
     public String getContentBYPointId(@RequestParam(value = "id") String id) throws Exception {

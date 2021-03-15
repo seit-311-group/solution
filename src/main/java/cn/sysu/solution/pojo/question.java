@@ -13,6 +13,10 @@ public class question {
 
     private String analysis;
 
+    private String addpicture;
+
+    private String changepicture;
+
     public Integer getId() {
         return id;
     }
@@ -59,5 +63,21 @@ public class question {
 
     public void setAnalysis(String analysis) {
         this.analysis = analysis == null ? null : analysis.trim();
+    }
+
+    public String getAddpicture() {
+        return addpicture;
+    }
+
+    public void setAddpicture(String addpicture) {
+        this.addpicture = addpicture == null ? null : addpicture.trim();
+    }
+
+    public String getChangepicture() {
+        return changepicture;
+    }
+
+    public void setChangepicture(String changepicture) {
+        this.changepicture = changepicture == null ? null : changepicture.trim();
     }
 }

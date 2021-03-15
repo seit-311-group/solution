@@ -513,6 +513,146 @@ public class questionExample {
             addCriterion("analysis not between", value1, value2, "analysis");
             return (Criteria) this;
         }
+
+        public Criteria andAddpictureIsNull() {
+            addCriterion("addPicture is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddpictureIsNotNull() {
+            addCriterion("addPicture is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddpictureEqualTo(String value) {
+            addCriterion("addPicture =", value, "addpicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddpictureNotEqualTo(String value) {
+            addCriterion("addPicture <>", value, "addpicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddpictureGreaterThan(String value) {
+            addCriterion("addPicture >", value, "addpicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddpictureGreaterThanOrEqualTo(String value) {
+            addCriterion("addPicture >=", value, "addpicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddpictureLessThan(String value) {
+            addCriterion("addPicture <", value, "addpicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddpictureLessThanOrEqualTo(String value) {
+            addCriterion("addPicture <=", value, "addpicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddpictureLike(String value) {
+            addCriterion("addPicture like", value, "addpicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddpictureNotLike(String value) {
+            addCriterion("addPicture not like", value, "addpicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddpictureIn(List<String> values) {
+            addCriterion("addPicture in", values, "addpicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddpictureNotIn(List<String> values) {
+            addCriterion("addPicture not in", values, "addpicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddpictureBetween(String value1, String value2) {
+            addCriterion("addPicture between", value1, value2, "addpicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddpictureNotBetween(String value1, String value2) {
+            addCriterion("addPicture not between", value1, value2, "addpicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andChangepictureIsNull() {
+            addCriterion("changePicture is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChangepictureIsNotNull() {
+            addCriterion("changePicture is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChangepictureEqualTo(String value) {
+            addCriterion("changePicture =", value, "changepicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andChangepictureNotEqualTo(String value) {
+            addCriterion("changePicture <>", value, "changepicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andChangepictureGreaterThan(String value) {
+            addCriterion("changePicture >", value, "changepicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andChangepictureGreaterThanOrEqualTo(String value) {
+            addCriterion("changePicture >=", value, "changepicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andChangepictureLessThan(String value) {
+            addCriterion("changePicture <", value, "changepicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andChangepictureLessThanOrEqualTo(String value) {
+            addCriterion("changePicture <=", value, "changepicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andChangepictureLike(String value) {
+            addCriterion("changePicture like", value, "changepicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andChangepictureNotLike(String value) {
+            addCriterion("changePicture not like", value, "changepicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andChangepictureIn(List<String> values) {
+            addCriterion("changePicture in", values, "changepicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andChangepictureNotIn(List<String> values) {
+            addCriterion("changePicture not in", values, "changepicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andChangepictureBetween(String value1, String value2) {
+            addCriterion("changePicture between", value1, value2, "changepicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andChangepictureNotBetween(String value1, String value2) {
+            addCriterion("changePicture not between", value1, value2, "changepicture");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
